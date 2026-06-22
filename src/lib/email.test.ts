@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isValidEmail } from "./email";
+import { isValidEmail, suggestEmailDomain } from "./email";
 
 describe("isValidEmail", () => {
   const valid = [
@@ -39,5 +39,37 @@ describe("isValidEmail", () => {
 
   it.each(invalid)("rejects %s", (email) => {
     expect(isValidEmail(email)).toBe(false);
+  });
+});
+
+describe("suggestEmailDomain", () => {
+  const suggests: [string, string][] = [
+    ["adrian@gmai.com", "adrian@gmail.com"],
+    ["adrian@gmial.com", "adrian@gmail.com"],
+    ["adrian@gmail.con", "adrian@gmail.com"],
+    ["adrian@hotmial.com", "adrian@hotmail.com"],
+    ["adrian@outlok.com", "adrian@outlook.com"],
+  ];
+
+  const noSuggestion = [
+    "adrian@gmail.com", // exact, correct
+    "broker@asterio.ae", // legit non-popular domain
+    "x@company.com",
+    "user@mail.com", // legit provider, must not be flagged as gmail
+    "a@b.co",
+    "no-at-sign.com",
+    "user@",
+  ];
+
+  it.each(suggests)("suggests for %s", (input, expected) => {
+    expect(suggestEmailDomain(input)).toBe(expected);
+  });
+
+  it.each(noSuggestion)("returns null for %s", (input) => {
+    expect(suggestEmailDomain(input)).toBeNull();
+  });
+
+  it("preserves the local part casing", () => {
+    expect(suggestEmailDomain("Adrian.S@gmai.com")).toBe("Adrian.S@gmail.com");
   });
 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { OtpInput } from "@/components/ui/otp-input";
 import { cn } from "@/lib/cn";
 
 const CODE_LENGTH = 6;
+const RESEND_SECONDS = 60;
 
 function maskEmail(email: string) {
   const [name, domain] = email.split("@");
@@ -25,6 +26,20 @@ function VerifyContent() {
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [errorNonce, setErrorNonce] = useState(0);
+  const [secondsLeft, setSecondsLeft] = useState(RESEND_SECONDS);
+
+  // Countdown so "Resend code" can't be spammed.
+  useEffect(() => {
+    if (secondsLeft <= 0) return;
+    const id = setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
+    return () => clearTimeout(id);
+  }, [secondsLeft]);
+
+  function resend() {
+    if (secondsLeft > 0) return;
+    // Phase B: trigger Supabase resend OTP here.
+    setSecondsLeft(RESEND_SECONDS);
+  }
 
   function fail(message: string) {
     setError(message);
@@ -84,9 +99,17 @@ function VerifyContent() {
           </Button>
           <p className="text-sm text-tertiary">
             Didn&apos;t receive the code?{" "}
-            <button type="button" className="font-semibold text-brand-secondary">
-              Resend code
-            </button>
+            {secondsLeft > 0 ? (
+              <span className="text-quaternary">Resend in {secondsLeft}s</span>
+            ) : (
+              <button
+                type="button"
+                onClick={resend}
+                className="font-semibold text-brand-secondary"
+              >
+                Resend code
+              </button>
+            )}
           </p>
         </div>
       </div>

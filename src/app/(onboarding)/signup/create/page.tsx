@@ -9,11 +9,12 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PasswordStrength } from "@/components/ui/password-strength";
 import { GoogleIcon } from "@/components/icons/google";
-import { isValidEmail } from "@/lib/email";
+import { isValidEmail, suggestEmailDomain } from "@/lib/email";
 
 export default function SignupPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null);
   const [password, setPassword] = useState("");
   const [agree, setAgree] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -46,23 +47,48 @@ export default function SignupPage() {
       <div className="flex w-full flex-col gap-3xl">
         <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3xl">
           <div className="flex flex-col gap-xl">
-            <Input
-              id="email"
-              type="email"
-              label="Email address"
-              placeholder="name@company.com"
-              autoComplete="email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                if (errors.email) setErrors((p) => ({ ...p, email: undefined }));
-              }}
-              onBlur={() => {
-                if (email.trim() && !isValidEmail(email))
-                  setErrors((p) => ({ ...p, email: "Enter a valid email address." }));
-              }}
-              error={errors.email}
-            />
+            <div className="flex flex-col gap-sm">
+              <Input
+                id="email"
+                type="email"
+                label="Email address"
+                placeholder="name@company.com"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (errors.email) setErrors((p) => ({ ...p, email: undefined }));
+                  if (emailSuggestion) setEmailSuggestion(null);
+                }}
+                onBlur={() => {
+                  const value = email.trim();
+                  if (value && !isValidEmail(value)) {
+                    setErrors((p) => ({ ...p, email: "Enter a valid email address." }));
+                    setEmailSuggestion(null);
+                  } else {
+                    setEmailSuggestion(suggestEmailDomain(value));
+                  }
+                }}
+                error={errors.email}
+              />
+              {emailSuggestion && (
+                <p className="text-sm text-tertiary">
+                  Did you mean{" "}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEmail(emailSuggestion);
+                      setEmailSuggestion(null);
+                      setErrors((p) => ({ ...p, email: undefined }));
+                    }}
+                    className="font-medium text-brand-secondary"
+                  >
+                    {emailSuggestion}
+                  </button>
+                  ?
+                </p>
+              )}
+            </div>
             <div className="flex flex-col gap-md">
               <Input
                 id="password"
