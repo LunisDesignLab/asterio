@@ -286,6 +286,11 @@ building the product. **Reply in Romanian**, warm and direct.
 - **Security is non-negotiable.** No leaks, no data exposed across tenants. RLS first.
 - **Work autonomously to completion**, then self-verify and report with proof. Don't ask
   permission at every step.
+- **Quality & security are Claude's to own.** Adrian is the founder/designer — not a QA,
+  security, or API expert. He should never be the one to find a bug. Definition of done =
+  build + lint + test green; pure logic in `src/lib/` with unit tests; edge cases hunted
+  proactively (validation, rate-limiting/anti-spam, abuse, auth, error/empty states, a11y);
+  security/UX risks surfaced before he hits them. Never present unverified work as done.
 - **Audit before building** any page (see Figma workflow).
 - **Don't work on live / don't push** until Adrian says so. Develop locally / on a branch.
 - UAE-specific: data residency in-region (Supabase ME region + matched Vercel function
