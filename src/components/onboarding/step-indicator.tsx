@@ -4,12 +4,12 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/cn";
 
 // "/signup" (Choose your role) is a pre-step with no indicator.
-// Main steps: Account → Profile → Plan → Payment.
+// Main steps: Create account → Verify email → Complete profile → Choose plan.
 const STEP_BY_PATH: Record<string, number> = {
   "/signup/create": 1,
-  "/signup/verify": 1,
-  "/signup/profile": 2,
-  "/signup/plan": 3,
+  "/signup/verify": 2,
+  "/signup/profile": 3,
+  "/signup/plan": 4,
   "/signup/payment": 4,
 };
 

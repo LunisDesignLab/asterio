@@ -256,7 +256,10 @@ we build from his Figma via the Figma MCP, not from any third-party component li
 - TypeScript strict; no `any`, no `@ts-ignore`. Fix root causes, never suppress.
 - File names kebab-case; components PascalCase.
 - Server components by default; `"use client"` only where needed.
-- Commit style: short imperative subject; body explains why. Commit/push only when Adrian asks.
+- Git: **commit + push at each milestone** (a completed page/component, build + lint green) —
+  clean working states, not every tiny edit. Short imperative subject; body explains why.
+  Remote: `github.com/LunisDesignLab/asterio` (branch `main`). Pushing to GitHub ≠ live deploy;
+  never deploy to live without Adrian's ok.
 - Token efficiency: work in small, verified vertical slices. Don't generate dozens of files
   at once. Read these rules once instead of re-deriving.
 
