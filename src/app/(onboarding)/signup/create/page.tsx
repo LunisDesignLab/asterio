@@ -7,6 +7,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import { PasswordStrength } from "@/components/ui/password-strength";
 import { GoogleIcon } from "@/components/icons/google";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -56,26 +57,29 @@ export default function SignupPage() {
               onChange={(e) => setEmail(e.target.value)}
               error={errors.email}
             />
-            <Input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              label="Password"
-              placeholder="Create a password"
-              autoComplete="new-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              error={errors.password}
-              trailing={
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((v) => !v)}
-                  className="text-quaternary transition-colors hover:text-tertiary"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                >
-                  {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
-                </button>
-              }
-            />
+            <div className="flex flex-col gap-md">
+              <Input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                label="Password"
+                placeholder="Create a password"
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                error={errors.password}
+                trailing={
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((v) => !v)}
+                    className="text-quaternary transition-colors hover:text-tertiary"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
+                  </button>
+                }
+              />
+              <PasswordStrength password={password} />
+            </div>
           </div>
 
           <div className="flex flex-col gap-xs">
