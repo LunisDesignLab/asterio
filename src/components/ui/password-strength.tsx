@@ -7,7 +7,7 @@ export function PasswordStrength({ password }: { password: string }) {
   const { score, label } = scorePassword(password);
 
   return (
-    <div className="flex flex-col gap-xs" aria-live="polite">
+    <div className="flex flex-col gap-sm">
       <div className="flex gap-xs">
         {[1, 2, 3, 4].map((segment) => (
           <span
@@ -17,11 +17,17 @@ export function PasswordStrength({ password }: { password: string }) {
           />
         ))}
       </div>
-      {score > 0 && (
-        <span className="text-sm" style={{ color: COLORS[score] }}>
-          {label} password
+      {/* Fixed row so the strength word never shifts content */}
+      <div className="flex items-center justify-between gap-md">
+        <span className="text-sm text-tertiary">Minimum 8 characters required.</span>
+        <span
+          className="text-sm font-medium"
+          style={{ color: score > 0 ? COLORS[score] : undefined }}
+          aria-live="polite"
+        >
+          {score > 0 ? label : ""}
         </span>
-      )}
+      </div>
     </div>
   );
 }

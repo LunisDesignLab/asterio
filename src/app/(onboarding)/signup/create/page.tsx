@@ -62,7 +62,7 @@ export default function SignupPage() {
                 id="password"
                 type={showPassword ? "text" : "password"}
                 label="Password"
-                placeholder="Min 8 characters long..."
+                placeholder="Create your password"
                 autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
