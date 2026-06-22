@@ -5,7 +5,7 @@ const AVATARS = [1, 2, 3, 4, 5];
 /** Right-hand marketing panel shared across the onboarding flow. */
 export function MarketingPanel() {
   return (
-    <div className="relative hidden flex-1 flex-col overflow-hidden pt-6xl pl-7xl pb-4xl lg:flex">
+    <div className="relative hidden w-[42%] shrink-0 flex-col overflow-hidden pt-6xl pl-7xl pb-4xl lg:flex">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/onboarding/panel-bg.png"

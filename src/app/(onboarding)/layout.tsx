@@ -11,7 +11,7 @@ export default function OnboardingLayout({
   return (
     <div className="flex min-h-screen w-full bg-primary">
       {/* Left: form column */}
-      <div className="relative flex flex-1 flex-col items-center justify-center px-4xl lg:max-w-[640px] lg:min-w-[480px]">
+      <div className="relative flex flex-1 flex-col items-center justify-center px-4xl">
         <header className="absolute left-8 right-8 top-8 flex items-center justify-between">
           <div className="flex items-center gap-[14px] text-[#0a0d12]">
             <AsterioLogo className="size-[30px]" />

@@ -20,6 +20,7 @@ const LANGUAGES = [
   "Mandarin",
   "Tagalog",
   "Spanish",
+  "Romanian",
 ] as const;
 
 function ProfileContent() {
@@ -30,6 +31,7 @@ function ProfileContent() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [company, setCompany] = useState("");
+  const [rera, setRera] = useState("");
   const [languages, setLanguages] = useState<string[]>([]);
   const [errors, setErrors] = useState<{
     firstName?: string;
@@ -66,32 +68,52 @@ function ProfileContent() {
 
       <form onSubmit={handleSubmit} noValidate className="flex w-full flex-col gap-4xl">
         <div className="flex w-full flex-col gap-3xl">
-          <Input
-            id="firstName"
-            label="First name"
-            placeholder="e.g. Mohammed"
-            autoComplete="given-name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            error={errors.firstName}
-          />
-          <Input
-            id="lastName"
-            label="Last name"
-            placeholder="e.g. Al Mansoori"
-            autoComplete="family-name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            error={errors.lastName}
-          />
-          <Input
-            id="company"
-            label="Company Name (optional)"
-            placeholder="e.g. Elite Real Estate L.L.C"
-            autoComplete="organization"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-          />
+          <div className="flex gap-xl">
+            <div className="min-w-0 flex-1">
+              <Input
+                id="firstName"
+                label="First name"
+                placeholder="e.g. Mohammed"
+                autoComplete="given-name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                error={errors.firstName}
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <Input
+                id="lastName"
+                label="Last name"
+                placeholder="e.g. Al Mansoori"
+                autoComplete="family-name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                error={errors.lastName}
+              />
+            </div>
+          </div>
+          <div className="flex gap-xl">
+            <div className="min-w-0 flex-1">
+              <Input
+                id="company"
+                label="Company name (optional)"
+                placeholder="e.g. Elite Real Estate L.L.C"
+                autoComplete="organization"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <Input
+                id="rera"
+                label="RERA (optional)"
+                placeholder="e.g. 12345"
+                inputMode="numeric"
+                value={rera}
+                onChange={(e) => setRera(e.target.value)}
+              />
+            </div>
+          </div>
           <div className="flex flex-col gap-sm">
             <MultiCombobox
               label="Preferred language"
