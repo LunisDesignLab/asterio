@@ -43,7 +43,7 @@ function VerifyContent() {
       return;
     }
     setError(null);
-    router.push("/signup/role");
+    router.push("/signup/profile");
   }
 
   return (
