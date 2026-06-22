@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MultiSelect } from "@/components/ui/multi-select";
+import { MultiCombobox } from "@/components/ui/multi-combobox";
 import { AvatarUpload } from "@/components/ui/avatar-upload";
 
 // Provisional, UAE-relevant list — confirm with Adrian.
@@ -93,7 +93,7 @@ function ProfileContent() {
             onChange={(e) => setCompany(e.target.value)}
           />
           <div className="flex flex-col gap-sm">
-            <MultiSelect
+            <MultiCombobox
               label="Preferred language"
               placeholder="Select at least one language"
               options={LANGUAGES}
