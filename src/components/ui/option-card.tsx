@@ -17,8 +17,12 @@ export function OptionCard({ selected, onClick, icon, title }: OptionCardProps) 
       onClick={onClick}
       aria-pressed={selected}
       className={cn(
-        "flex h-[116px] w-full items-center gap-2xl rounded-4xl bg-secondary px-xl text-left transition-colors",
-        selected ? "border-[3px] border-[#7f56d9]" : "border border-secondary",
+        // Selection drawn as an inset ring (box-shadow) so the border width never
+        // changes the layout — content stays put when toggling.
+        "flex h-[116px] w-full items-center gap-2xl rounded-4xl bg-secondary px-xl text-left transition-shadow",
+        selected
+          ? "shadow-[inset_0_0_0_3px_#7f56d9]"
+          : "shadow-[inset_0_0_0_1px_#e9eaeb]",
       )}
     >
       <span className="flex shrink-0 items-center justify-center">{icon}</span>

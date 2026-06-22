@@ -65,7 +65,7 @@ export default function RolePage() {
         <img
           src="/onboarding/developer-card.png"
           alt=""
-          className="pointer-events-none absolute right-[-1px] top-[-7px] h-[94px] w-[131px] object-cover blur-[6px]"
+          className="pointer-events-none absolute right-[-1px] top-[-7px] h-[94px] w-[131px] object-cover"
         />
       </Link>
     </div>

@@ -54,7 +54,14 @@ export default function SignupPage() {
               placeholder="name@company.com"
               autoComplete="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (errors.email) setErrors((p) => ({ ...p, email: undefined }));
+              }}
+              onBlur={() => {
+                if (email.trim() && !EMAIL_RE.test(email))
+                  setErrors((p) => ({ ...p, email: "Enter a valid email address." }));
+              }}
               error={errors.email}
             />
             <div className="flex flex-col gap-md">
