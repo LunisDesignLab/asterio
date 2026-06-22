@@ -51,7 +51,7 @@ export default function SignupPage() {
               id="email"
               type="email"
               label="Email address"
-              placeholder="you@company.com"
+              placeholder="name@company.com"
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -62,7 +62,7 @@ export default function SignupPage() {
                 id="password"
                 type={showPassword ? "text" : "password"}
                 label="Password"
-                placeholder="Create a password"
+                placeholder="Min 8 characters long..."
                 autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

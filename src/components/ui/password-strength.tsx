@@ -5,7 +5,6 @@ const COLORS = ["", "#f04438", "#f79009", "#84cc16", "#17b26a"];
 
 export function PasswordStrength({ password }: { password: string }) {
   const { score, label } = scorePassword(password);
-  if (score === 0) return null;
 
   return (
     <div className="flex flex-col gap-xs" aria-live="polite">
@@ -18,9 +17,11 @@ export function PasswordStrength({ password }: { password: string }) {
           />
         ))}
       </div>
-      <span className="text-sm" style={{ color: COLORS[score] }}>
-        {label} password
-      </span>
+      {score > 0 && (
+        <span className="text-sm" style={{ color: COLORS[score] }}>
+          {label} password
+        </span>
+      )}
     </div>
   );
 }
