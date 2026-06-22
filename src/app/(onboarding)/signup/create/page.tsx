@@ -9,8 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PasswordStrength } from "@/components/ui/password-strength";
 import { GoogleIcon } from "@/components/icons/google";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { isValidEmail } from "@/lib/email";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -23,7 +22,7 @@ export default function SignupPage() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const next: typeof errors = {};
-    if (!EMAIL_RE.test(email)) next.email = "Enter a valid email address.";
+    if (!isValidEmail(email)) next.email = "Enter a valid email address.";
     if (password.length < 8) next.password = "Password must be at least 8 characters.";
     if (!agree) next.agree = "Please accept the Terms & conditions to continue.";
     setErrors(next);
@@ -59,7 +58,7 @@ export default function SignupPage() {
                 if (errors.email) setErrors((p) => ({ ...p, email: undefined }));
               }}
               onBlur={() => {
-                if (email.trim() && !EMAIL_RE.test(email))
+                if (email.trim() && !isValidEmail(email))
                   setErrors((p) => ({ ...p, email: "Enter a valid email address." }));
               }}
               error={errors.email}

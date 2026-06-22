@@ -48,9 +48,11 @@ Node 20+. Design source of truth is **Figma** (file `Asterio`, Broker module
 npm run dev     # dev server
 npm run build   # production build, must pass with zero TS errors
 npm run lint    # eslint, must pass clean
+npm test        # vitest unit tests (lib logic), must pass
 ```
 
-Always run `npm run build` before declaring a task complete.
+Always run **build + lint + test** before declaring a task complete. Pure logic
+(validation, scoring, attention/analytics engines) lives in `src/lib/` with unit tests.
 
 ## Roles, plans, pricing & access (security-critical — these are invariants)
 
