@@ -1,4 +1,7 @@
-@import "tailwindcss";
+/* UntitledUI PRO foundation (their full theme, plugins, utilities) — provides
+   the extra tokens/motion their components need. Our tokens below override it
+   where they overlap, so our existing pages render exactly as before. */
+@import "../styles/globals.css";
 
 /* ============================================================
    Asterio design tokens — UntitledUI base, extracted from Figma.

@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Untitled UI vendored components (their conventions, not ours to lint).
+    "src/components/base/**",
+    "src/components/foundations/**",
+    "src/components/marketing/**",
+    "src/utils/**",
   ]),
 ]);
 
