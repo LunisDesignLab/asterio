@@ -84,6 +84,12 @@
   @keyframes border-spin {
     to { --border-angle: 360deg; }
   }
+
+  --animate-glow-drift: glow-drift 8s ease-in-out infinite alternate;
+  @keyframes glow-drift {
+    from { transform: translate(0, 0); }
+    to { transform: translate(14px, 12px); }
+  }
 }
 
 /* ---- Semantic color tokens (Figma variable names) ---- */
@@ -156,7 +162,8 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .animate-otp-bounce,
-  .animate-border-spin {
+  .animate-border-spin,
+  .animate-glow-drift {
     animation: none;
   }
 }

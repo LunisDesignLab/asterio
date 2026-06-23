@@ -41,6 +41,7 @@ export const PLANS: Plan[] = [
     ],
     cta: "Choose Plus",
     badge: "Recommended",
+    featured: true,
   },
   {
     id: "pro",
@@ -56,8 +57,6 @@ export const PLANS: Plan[] = [
       "PDF parsing · CSV exports · 12 mo history",
     ],
     cta: "Choose Pro",
-    badge: "Most popular",
-    featured: true,
   },
 ];
 
