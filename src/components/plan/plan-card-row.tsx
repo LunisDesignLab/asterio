@@ -23,9 +23,9 @@ export function PlanCardRow({
       <div className="flex w-full shrink-0 flex-col gap-md md:w-[220px]">
         <div className="flex items-center gap-md">
           <h3 className="text-xl font-semibold text-primary">{plan.name}</h3>
-          {plan.featured && (
+          {plan.badge && (
             <span className="rounded-full bg-[#f4f0ff] px-md py-[2px] text-xs font-semibold text-brand-secondary">
-              Most popular
+              {plan.badge}
             </span>
           )}
         </div>
@@ -40,7 +40,7 @@ export function PlanCardRow({
 
       <ul className="grid flex-1 gap-x-xl gap-y-md sm:grid-cols-2">
         {plan.highlights.map((highlight) => (
-          <li key={highlight} className="flex items-start gap-md text-sm text-secondary">
+          <li key={highlight} className="flex items-start gap-md text-sm font-medium text-secondary">
             <Check className="mt-[2px] size-4 shrink-0 text-brand-secondary" aria-hidden="true" />
             {highlight}
           </li>

@@ -7,6 +7,7 @@ export interface Plan {
   tagline: string;
   highlights: string[];
   cta: string;
+  badge?: string;
   featured?: boolean;
 }
 
@@ -39,6 +40,7 @@ export const PLANS: Plan[] = [
       "90 days analytics history",
     ],
     cta: "Choose Plus",
+    badge: "Recommended",
   },
   {
     id: "pro",
@@ -54,6 +56,7 @@ export const PLANS: Plan[] = [
       "PDF parsing · CSV exports · 12 mo history",
     ],
     cta: "Choose Pro",
+    badge: "Most popular",
     featured: true,
   },
 ];

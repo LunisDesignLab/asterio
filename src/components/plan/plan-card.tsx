@@ -38,13 +38,13 @@ export function PlanCard({
             <Icon className="size-5" aria-hidden="true" />
           </span>
           <h3 className="text-xl font-semibold text-primary">{plan.name}</h3>
-          {plan.featured && (
+          {plan.badge && (
             <span className="rounded-full bg-[#f4f0ff] px-md py-[2px] text-xs font-semibold text-brand-secondary">
-              Most popular
+              {plan.badge}
             </span>
           )}
         </div>
-        <p className="min-h-[40px] text-sm text-tertiary">{plan.tagline}</p>
+        <p className="min-h-[60px] text-sm text-tertiary">{plan.tagline}</p>
       </div>
 
       <div className="flex items-baseline gap-xs">
@@ -58,9 +58,9 @@ export function PlanCard({
         {plan.cta}
       </Button>
 
-      <ul className="flex flex-col gap-md border-t border-secondary pt-xl">
+      <ul className="flex flex-col gap-md">
         {plan.highlights.map((highlight) => (
-          <li key={highlight} className="flex items-start gap-md text-sm text-secondary">
+          <li key={highlight} className="flex items-start gap-md text-sm font-medium text-secondary">
             <Check className="mt-[2px] size-4 shrink-0 text-brand-secondary" aria-hidden="true" />
             {highlight}
           </li>

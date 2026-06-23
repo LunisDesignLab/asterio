@@ -19,28 +19,27 @@ export function PlanComparison() {
       <h2 className="text-display-xs font-semibold text-primary">Compare plans</h2>
 
       <div className="overflow-hidden rounded-2xl bg-primary shadow-[inset_0_0_0_1px_#e9eaeb]">
-        <div className={`${GRID} border-b border-secondary px-xl py-lg text-sm font-semibold text-tertiary`}>
-          <span>Feature</span>
-          <span className="text-center">Free</span>
-          <span className="text-center">Plus</span>
-          <span className="text-center">Pro</span>
+        {/* Column header — the single, clearly-styled header of the table */}
+        <div className={`${GRID} border-b-2 border-secondary px-xl py-xl`}>
+          <span className="text-sm font-semibold text-tertiary">Features</span>
+          <span className="text-center text-md font-semibold text-primary">Free</span>
+          <span className="text-center text-md font-semibold text-primary">Plus</span>
+          <span className="text-center text-md font-semibold text-brand-secondary">Pro</span>
         </div>
 
+        {/* Categories — subtle uppercase labels, not header bands */}
         {COMPARISON.map((group, index) => (
-          <details key={group.title} open={index === 0} className="group border-b border-secondary last:border-b-0">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-md bg-secondary px-xl py-lg text-sm font-semibold text-primary [&::-webkit-details-marker]:hidden">
-              {group.title}
+          <details key={group.title} open={index === 0} className="group">
+            <summary className="flex cursor-pointer list-none items-center gap-md border-t border-secondary px-xl py-md text-xs font-semibold uppercase tracking-[0.06em] text-tertiary transition-colors hover:text-secondary [&::-webkit-details-marker]:hidden">
               <ChevronDown
-                className="size-5 shrink-0 text-quaternary transition-transform group-open:rotate-180"
+                className="size-4 shrink-0 -rotate-90 transition-transform group-open:rotate-0"
                 aria-hidden="true"
               />
+              {group.title}
             </summary>
-            <div>
+            <div className="pb-sm">
               {group.rows.map((row) => (
-                <div
-                  key={row.feature}
-                  className={`${GRID} border-t border-secondary px-xl py-md text-sm`}
-                >
+                <div key={row.feature} className={`${GRID} px-xl py-md text-sm`}>
                   <span className="text-secondary">{row.feature}</span>
                   <CellView value={row.free} />
                   <CellView value={row.plus} />
