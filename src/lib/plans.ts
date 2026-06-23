@@ -30,7 +30,7 @@ export const PLANS: Plan[] = [
     name: "Plus",
     priceMonthly: 49,
     tagline:
-      "For independent brokers or small agencies organizing their portfolio and finding new investors.",
+      "For independent brokers building stronger investor relationships and growing their network.",
     highlights: [
       "Up to 5 groups · 150 members",
       "Discover Investors · 5 requests / mo",
@@ -45,7 +45,7 @@ export const PLANS: Plan[] = [
     name: "Pro",
     priceMonthly: 199,
     tagline:
-      "For active brokers managing larger volumes who use investor acquisition as a growth channel.",
+      "For brokers who want to move faster, stay ahead of every deal, and scale investor acquisition.",
     highlights: [
       "Up to 25 groups · 1,000 members",
       "Full Discover · 25 requests / mo",

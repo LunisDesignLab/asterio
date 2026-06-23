@@ -31,11 +31,6 @@ export function BillingToggle({
             )}
           >
             {option.label}
-            {option.id === "annual" && (
-              <span className={cn("ml-xs text-xs", active ? "text-white/80" : "text-brand-secondary")}>
-                save 17%
-              </span>
-            )}
           </button>
         );
       })}

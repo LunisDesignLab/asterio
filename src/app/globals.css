@@ -79,6 +79,11 @@
     65% { transform: translateY(-3px); }
     100% { transform: translateY(0); }
   }
+
+  --animate-border-spin: border-spin 4s linear infinite;
+  @keyframes border-spin {
+    to { --border-angle: 360deg; }
+  }
 }
 
 /* ---- Semantic color tokens (Figma variable names) ---- */
@@ -142,8 +147,16 @@ body {
   }
 }
 
+/* Animatable angle for the Pro card's shimmering gradient border. */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-otp-bounce {
+  .animate-otp-bounce,
+  .animate-border-spin {
     animation: none;
   }
 }

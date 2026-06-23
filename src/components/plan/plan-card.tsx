@@ -1,7 +1,13 @@
-import { Check } from "lucide-react";
+import { Check, Crown, Rocket, Zap, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/button";
-import type { Plan } from "@/lib/plans";
+import type { Plan, PlanId } from "@/lib/plans";
+
+const ICONS: Record<PlanId, LucideIcon> = {
+  free: Rocket,
+  plus: Zap,
+  pro: Crown,
+};
 
 export function PlanCard({
   plan,
@@ -12,17 +18,25 @@ export function PlanCard({
   price: number;
   onSelect: () => void;
 }) {
-  return (
+  const Icon = ICONS[plan.id];
+
+  const content = (
     <div
       className={cn(
-        "flex flex-1 flex-col gap-xl rounded-2xl bg-primary p-3xl",
-        plan.featured
-          ? "shadow-md shadow-[inset_0_0_0_2px_#7f56d9]"
-          : "shadow-[inset_0_0_0_1px_#e9eaeb]",
+        "flex flex-1 flex-col gap-xl bg-primary p-3xl",
+        plan.featured ? "rounded-[14px]" : "rounded-2xl shadow-[inset_0_0_0_1px_#e9eaeb]",
       )}
     >
-      <div className="flex flex-col gap-xs">
+      <div className="flex flex-col gap-lg">
         <div className="flex items-center gap-md">
+          <span
+            className={cn(
+              "flex size-10 shrink-0 items-center justify-center rounded-[10px]",
+              plan.featured ? "bg-[#f4f0ff] text-brand-secondary" : "bg-secondary text-tertiary",
+            )}
+          >
+            <Icon className="size-5" aria-hidden="true" />
+          </span>
           <h3 className="text-xl font-semibold text-primary">{plan.name}</h3>
           {plan.featured && (
             <span className="rounded-full bg-[#f4f0ff] px-md py-[2px] text-xs font-semibold text-brand-secondary">
@@ -30,7 +44,7 @@ export function PlanCard({
             </span>
           )}
         </div>
-        <p className="text-sm text-tertiary">{plan.tagline}</p>
+        <p className="min-h-[40px] text-sm text-tertiary">{plan.tagline}</p>
       </div>
 
       <div className="flex items-baseline gap-xs">
@@ -44,7 +58,7 @@ export function PlanCard({
         {plan.cta}
       </Button>
 
-      <ul className="flex flex-col gap-md">
+      <ul className="flex flex-col gap-md border-t border-secondary pt-xl">
         {plan.highlights.map((highlight) => (
           <li key={highlight} className="flex items-start gap-md text-sm text-secondary">
             <Check className="mt-[2px] size-4 shrink-0 text-brand-secondary" aria-hidden="true" />
@@ -52,6 +66,24 @@ export function PlanCard({
           </li>
         ))}
       </ul>
+    </div>
+  );
+
+  if (!plan.featured) {
+    return <div className="flex flex-1">{content}</div>;
+  }
+
+  return (
+    <div className="relative flex flex-1 rounded-2xl p-[2px]">
+      <div
+        className="absolute inset-0 rounded-2xl animate-border-spin"
+        style={{
+          background:
+            "conic-gradient(from var(--border-angle), #7f56d9, #E48B0F, #7f56d9, #E48B0F, #7f56d9)",
+        }}
+        aria-hidden="true"
+      />
+      <div className="relative flex flex-1">{content}</div>
     </div>
   );
 }

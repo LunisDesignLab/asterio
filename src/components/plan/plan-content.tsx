@@ -4,14 +4,16 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PLANS, annualMonthly, type Plan } from "@/lib/plans";
 import { Button } from "@/components/ui/button";
+import { RecommendedBadge } from "@/components/icons/laurel";
 import { BillingToggle, type Billing } from "@/components/plan/billing-toggle";
 import { PlanCard } from "@/components/plan/plan-card";
 import { PlanCardRow } from "@/components/plan/plan-card-row";
+import { PlanCarousel } from "@/components/plan/plan-carousel";
 import { PlanComparison } from "@/components/plan/plan-comparison";
 import { FaqSection } from "@/components/plan/faq-section";
 import { Testimonials } from "@/components/plan/testimonials";
 
-export type CardsLayout = "columns" | "rows" | "split";
+export type CardsLayout = "columns" | "rows" | "split" | "carousel";
 
 export function PlanContent({ cardsLayout = "columns" }: { cardsLayout?: CardsLayout }) {
   const router = useRouter();
@@ -29,48 +31,70 @@ export function PlanContent({ cardsLayout = "columns" }: { cardsLayout?: CardsLa
   }
 
   return (
-    <div className="flex flex-col gap-8xl py-7xl">
-      <div className="flex flex-col items-center gap-xl text-center">
-        <div className="flex flex-col gap-sm">
-          <h1 className="text-display-sm font-semibold tracking-[-0.02em] text-primary">
-            Choose your plan
-          </h1>
-          <p className="text-md text-tertiary">
-            Start free, upgrade when you&apos;re ready. Cancel anytime.
-          </p>
+    <div className="flex flex-col gap-8xl pt-xl pb-8xl">
+      <div className="flex flex-col gap-4xl">
+        <div className="flex flex-col items-center gap-xl text-center">
+          <RecommendedBadge text="Recommended by Emaar" />
+          <div className="flex flex-col gap-sm">
+            <h1 className="text-display-sm font-semibold tracking-[-0.02em] text-primary">
+              Choose your plan
+            </h1>
+            <p className="text-md text-tertiary">Start free, upgrade when you&apos;re ready.</p>
+          </div>
+          <div className="flex flex-col items-center gap-md">
+            <BillingToggle value={billing} onChange={setBilling} />
+            <p className="text-sm font-medium text-brand-secondary">
+              Save 17% with annual billing — that&apos;s 2 months free.
+            </p>
+          </div>
         </div>
-        <BillingToggle value={billing} onChange={setBilling} />
+
+        <Cards cardsLayout={cardsLayout} priceFor={priceFor} onSelect={select} />
+
+        <p className="text-center text-sm text-tertiary">
+          No long-term commitment. Cancel anytime.
+        </p>
       </div>
 
-      {cardsLayout === "rows" ? (
-        <div className="flex flex-col gap-lg">
-          {PLANS.map((plan) => (
-            <PlanCardRow
-              key={plan.id}
-              plan={plan}
-              price={priceFor(plan)}
-              onSelect={() => select(plan.id)}
-            />
-          ))}
-        </div>
-      ) : cardsLayout === "split" ? (
-        <SplitCards priceFor={priceFor} onSelect={select} />
-      ) : (
-        <div className="flex flex-col gap-xl lg:flex-row lg:items-stretch">
-          {PLANS.map((plan) => (
-            <PlanCard
-              key={plan.id}
-              plan={plan}
-              price={priceFor(plan)}
-              onSelect={() => select(plan.id)}
-            />
-          ))}
-        </div>
-      )}
-
       <PlanComparison />
-      <FaqSection />
       <Testimonials />
+      <FaqSection />
+    </div>
+  );
+}
+
+function Cards({
+  cardsLayout,
+  priceFor,
+  onSelect,
+}: {
+  cardsLayout: CardsLayout;
+  priceFor: (plan: Plan) => number;
+  onSelect: (planId: string) => void;
+}) {
+  if (cardsLayout === "rows") {
+    return (
+      <div className="flex flex-col gap-lg">
+        {PLANS.map((plan) => (
+          <PlanCardRow key={plan.id} plan={plan} price={priceFor(plan)} onSelect={() => onSelect(plan.id)} />
+        ))}
+      </div>
+    );
+  }
+
+  if (cardsLayout === "carousel") {
+    return <PlanCarousel plans={PLANS} priceFor={priceFor} onSelect={onSelect} />;
+  }
+
+  if (cardsLayout === "split") {
+    return <SplitCards priceFor={priceFor} onSelect={onSelect} />;
+  }
+
+  return (
+    <div className="flex flex-col gap-xl lg:flex-row lg:items-stretch">
+      {PLANS.map((plan) => (
+        <PlanCard key={plan.id} plan={plan} price={priceFor(plan)} onSelect={() => onSelect(plan.id)} />
+      ))}
     </div>
   );
 }
@@ -105,12 +129,7 @@ function SplitCards({
 
       <div className="flex flex-col gap-xl lg:flex-row lg:items-stretch">
         {paid.map((plan) => (
-          <PlanCard
-            key={plan.id}
-            plan={plan}
-            price={priceFor(plan)}
-            onSelect={() => onSelect(plan.id)}
-          />
+          <PlanCard key={plan.id} plan={plan} price={priceFor(plan)} onSelect={() => onSelect(plan.id)} />
         ))}
       </div>
     </div>
