@@ -69,7 +69,7 @@ export function PlanComparison({ onSelect }: { onSelect?: (planId: string) => vo
 
         {STRIPED_GROUPS.map((group) => (
           <div key={group.title}>
-            <h3 className="bg-white px-xl pt-3xl pb-sm text-sm font-semibold text-brand-secondary">
+            <h3 className="bg-white px-xl pt-6xl pb-sm text-sm font-semibold text-brand-secondary">
               {group.title}
             </h3>
             {group.rows.map((row) => (
