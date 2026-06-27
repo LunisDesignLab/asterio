@@ -11,8 +11,7 @@ import { PlanCardRow } from "@/components/plan/plan-card-row";
 import { PlanCarousel } from "@/components/plan/plan-carousel";
 import { PlanComparison } from "@/components/plan/plan-comparison";
 import { FaqUntitled } from "@/components/plan/faq-untitled";
-import { TestimonialAbstractImage } from "@/components/marketing/testimonials/testimonial-abstract-image";
-import { TestimonialSocialCards02 } from "@/components/marketing/testimonials/testimonial-social-cards-02";
+import { TestimonialsSection } from "@/components/plan/testimonials-section";
 
 export type CardsLayout = "columns" | "rows" | "split" | "carousel";
 
@@ -58,8 +57,7 @@ export function PlanContent({ cardsLayout = "columns" }: { cardsLayout?: CardsLa
       </div>
 
       <PlanComparison />
-      <TestimonialAbstractImage />
-      <TestimonialSocialCards02 />
+      <TestimonialsSection />
       <FaqUntitled />
     </div>
   );

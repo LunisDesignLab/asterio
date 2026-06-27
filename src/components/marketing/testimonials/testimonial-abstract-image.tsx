@@ -43,8 +43,7 @@ export const TestimonialAbstractImage = () => {
     const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
 
     return (
-        <section className="bg-primary py-16 lg:py-24">
-            <div className="mx-auto flex max-w-container flex-col gap-12 overflow-hidden px-4 md:gap-16 md:px-8 lg:flex-row lg:items-center">
+        <div className="flex flex-col gap-12 overflow-hidden md:gap-16 lg:flex-row lg:items-center">
                 <figure className="flex flex-col gap-8 md:gap-12 lg:flex-1">
                     <div className="flex flex-1 flex-col gap-6 md:gap-12">
                         <AnimatePresence initial={false} mode="popLayout">
@@ -205,6 +204,5 @@ export const TestimonialAbstractImage = () => {
                     />
                 </div>
             </div>
-        </section>
     );
 };

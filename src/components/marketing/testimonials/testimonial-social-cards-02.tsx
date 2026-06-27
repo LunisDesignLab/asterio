@@ -61,12 +61,7 @@ const reviews = [
 
 export const TestimonialSocialCards02 = () => {
     return (
-        <div className="flex flex-col items-center gap-16 bg-primary py-16 lg:py-24">
-            <div className="flex max-w-container flex-col items-center gap-4 px-4 text-center lg:gap-5 lg:px-8">
-                <h1 className="text-display-sm font-semibold text-primary lg:text-display-md">Wall of love</h1>
-                <p className="text-lg text-tertiary lg:text-xl">Hear first-hand from our incredible community of customers.</p>
-            </div>
-            <div className="grid max-w-container grid-cols-1 gap-5 px-4 lg:grid-cols-3 lg:gap-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-6">
                 {reviews.map((review) => (
                     <div key={review.id} className="flex flex-col items-start gap-8 rounded-xl bg-secondary p-6 lg:justify-between lg:p-8">
                         <div className="flex flex-col items-start gap-4">
@@ -95,6 +90,5 @@ export const TestimonialSocialCards02 = () => {
                     </div>
                 ))}
             </div>
-        </div>
     );
 };
