@@ -57,7 +57,7 @@ export function PlanContent({ cardsLayout = "columns" }: { cardsLayout?: CardsLa
       </div>
 
       <div className="mx-auto w-full max-w-[1140px] px-8 pt-8xl pb-[100px]">
-        <PlanComparison />
+        <PlanComparison onSelect={select} />
       </div>
       <TestimonialsSection />
       <FaqUntitled />

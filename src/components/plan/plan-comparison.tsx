@@ -23,22 +23,53 @@ function CellView({ value }: { value: Cell }) {
   return <span className="block text-center text-sm font-medium text-secondary">{value}</span>;
 }
 
-export function PlanComparison() {
+function PlanHeadCell({
+  name,
+  featured,
+  onSelect,
+}: {
+  name: string;
+  featured?: boolean;
+  onSelect?: () => void;
+}) {
+  return (
+    <div className="flex flex-col items-center gap-sm">
+      <span className={cn("text-sm font-semibold", featured ? "text-brand-secondary" : "text-primary")}>
+        {name}
+      </span>
+      <button
+        type="button"
+        onClick={onSelect}
+        className={cn(
+          "rounded-full px-lg py-[5px] text-xs font-semibold transition",
+          featured
+            ? "bg-brand-solid text-white hover:brightness-95"
+            : "border border-primary bg-primary text-secondary hover:bg-secondary",
+        )}
+      >
+        Choose
+      </button>
+    </div>
+  );
+}
+
+export function PlanComparison({ onSelect }: { onSelect?: (planId: string) => void }) {
   return (
     <section className="flex flex-col gap-xl">
       <h2 className="text-display-xs font-semibold text-primary">Compare plans</h2>
 
-      <div className="overflow-hidden rounded-2xl">
-        <div className={`${GRID} border-b border-secondary px-xl py-md`}>
+      <div>
+        {/* Sticky head so the plan names + CTAs stay reachable while scrolling */}
+        <div className={`${GRID} sticky top-0 z-20 border-b border-secondary bg-white px-xl py-lg`}>
           <span className="text-sm font-semibold text-tertiary">Features</span>
-          <span className="text-center text-sm font-semibold text-primary">Free</span>
-          <span className="text-center text-sm font-semibold text-primary">Plus</span>
-          <span className="text-center text-sm font-semibold text-brand-secondary">Pro</span>
+          <PlanHeadCell name="Free" onSelect={() => onSelect?.("free")} />
+          <PlanHeadCell name="Plus" featured onSelect={() => onSelect?.("plus")} />
+          <PlanHeadCell name="Pro" onSelect={() => onSelect?.("pro")} />
         </div>
 
         {STRIPED_GROUPS.map((group) => (
           <div key={group.title}>
-            <h3 className="px-xl pt-3xl pb-sm text-sm font-semibold text-brand-secondary">
+            <h3 className="bg-white px-xl pt-3xl pb-sm text-sm font-semibold text-brand-secondary">
               {group.title}
             </h3>
             {group.rows.map((row) => (
