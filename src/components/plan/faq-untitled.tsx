@@ -53,21 +53,21 @@ const faqs = [
 
 export const FaqUntitled = () => {
   return (
-    <section className="flex flex-col gap-16 bg-primary py-16 lg:py-24">
-      <div className="mx-auto flex max-w-3xl flex-col items-center px-4 text-center md:px-8">
-        <span className="text-sm font-semibold text-brand-secondary md:text-md">FAQs</span>
-        <h2 className="mt-3 text-display-md font-semibold text-primary md:text-display-lg">
-          Frequently asked questions
-        </h2>
-        <p className="mt-4 text-lg text-tertiary md:mt-6 md:text-xl">
-          Have questions? We&apos;re here to help.
-        </p>
-      </div>
-
+    <section className="bg-primary py-16 lg:py-24">
       <div className="mx-auto w-full max-w-container px-4 md:px-8">
-        <dl className="grid w-full grid-cols-1 justify-items-center gap-x-8 gap-y-10 sm:grid-cols-2 md:gap-y-16 lg:grid-cols-3">
+        <div className="mx-auto flex max-w-[768px] flex-col items-center text-center">
+          <span className="text-sm font-semibold text-brand-secondary md:text-md">FAQs</span>
+          <h2 className="mt-3 text-display-md font-semibold text-primary md:text-display-lg">
+            Frequently asked questions
+          </h2>
+          <p className="mt-4 text-lg text-tertiary md:mt-6 md:text-xl">
+            Have questions? We&apos;re here to help.
+          </p>
+        </div>
+
+        <dl className="mt-16 grid grid-cols-1 justify-items-center gap-x-8 gap-y-10 sm:grid-cols-2 md:gap-y-16 lg:grid-cols-3">
           {faqs.map((item) => (
-            <div key={item.question} className="flex max-w-sm flex-col items-center text-center">
+            <div key={item.question} className="flex max-w-[384px] flex-col items-center text-center">
               <FeaturedIcon color="gray" theme="modern" size="lg" icon={item.icon} />
               <dt className="mt-4 text-lg font-semibold text-primary md:mt-5 md:text-xl">
                 {item.question}
@@ -77,7 +77,7 @@ export const FaqUntitled = () => {
           ))}
         </dl>
 
-        <div className="mt-12 flex flex-col items-center gap-6 rounded-2xl bg-secondary px-6 py-8 text-center md:mt-16 md:gap-8">
+        <div className="mt-16 flex flex-col items-center gap-6 rounded-2xl bg-secondary px-6 py-8 text-center md:gap-8">
           <div className="flex items-end -space-x-4">
             <Avatar src="https://www.untitledui.com/images/avatars/marco-kelly?fm=webp&q=80" alt="" size="lg" className="ring-[1.5px] ring-fg-white" />
             <Avatar src="https://www.untitledui.com/images/avatars/amelie-laurent?fm=webp&q=80" alt="" size="xl" className="z-10 ring-[1.5px] ring-fg-white" />
@@ -91,11 +91,8 @@ export const FaqUntitled = () => {
           </div>
           <Button size="xl">Get in touch</Button>
         </div>
-      </div>
 
-      {/* Closing CTA + product preview (image is a placeholder for now) */}
-      <div className="mx-auto w-full max-w-container px-4 md:px-8">
-        <div className="flex flex-col justify-center text-center">
+        <div className="mt-16 flex flex-col justify-center text-center">
           <h2 className="text-display-sm font-semibold text-primary md:text-display-md">
             Start growing your portfolio with Asterio
           </h2>
@@ -109,7 +106,8 @@ export const FaqUntitled = () => {
             <Button size="xl">Start for free</Button>
           </div>
         </div>
-        <div className="mx-auto mt-16 w-full max-w-container md:max-h-100 md:overflow-hidden">
+
+        <div className="mx-auto mt-16 w-full md:max-h-100 md:overflow-hidden">
           <div className="size-full rounded-[9.03px] bg-primary p-[0.9px] shadow-lg ring-[0.56px] ring-utility-neutral-300 ring-inset md:rounded-[32px] md:p-1 md:ring-[2px]">
             <div className="size-full rounded-[7.9px] bg-primary p-0.5 shadow-modern-mockup-inner-md md:rounded-[28px] md:p-[5.4px] md:shadow-modern-mockup-inner-lg">
               <div className="relative size-full overflow-hidden rounded-[6.77px] bg-utility-neutral-50 ring-[0.56px] ring-utility-neutral-200 md:rounded-[24px] md:ring-[2px]">
