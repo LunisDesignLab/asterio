@@ -11,7 +11,9 @@ export default function PlanLayout({ children }: { children: React.ReactNode }) 
         </div>
         <StepIndicator total={4} />
       </header>
-      <main className="mx-auto w-full max-w-[1140px] px-8 pb-8xl">{children}</main>
+      {/* Full width so sections (testimonials/FAQ) can span edge-to-edge;
+          PlanContent constrains the cards/comparison itself. */}
+      <main className="w-full">{children}</main>
     </div>
   );
 }

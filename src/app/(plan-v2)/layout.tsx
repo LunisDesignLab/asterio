@@ -15,7 +15,7 @@ export default function PlanV2Layout({ children }: { children: React.ReactNode }
           </div>
           <StepIndicator total={4} />
         </header>
-        <main className="mx-auto w-full max-w-[840px] flex-1 px-8 pb-8xl">{children}</main>
+        <main className="w-full flex-1">{children}</main>
       </div>
 
       <aside className="hidden h-screen w-[40%] shrink-0 self-start lg:sticky lg:top-0 lg:flex">

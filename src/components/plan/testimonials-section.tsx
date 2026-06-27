@@ -8,7 +8,7 @@ import { TestimonialSocialCards02 } from "@/components/marketing/testimonials/te
 export function TestimonialsSection() {
   return (
     <section className="bg-primary">
-      <div className="mx-auto flex max-w-container flex-col gap-4xl pt-[100px] pb-7xl">
+      <div className="mx-auto flex max-w-container flex-col gap-4xl px-4 pt-[100px] pb-7xl md:px-8">
         <div className="flex flex-col items-center gap-sm text-center">
           <h2 className="text-display-sm font-semibold text-primary lg:text-display-md">
             Wall of love

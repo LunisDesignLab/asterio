@@ -31,8 +31,8 @@ export function PlanContent({ cardsLayout = "columns" }: { cardsLayout?: CardsLa
   }
 
   return (
-    <div className="flex flex-col gap-8xl pt-xl pb-8xl">
-      <div className="flex flex-col gap-4xl">
+    <div className="flex flex-col">
+      <div className="mx-auto flex w-full max-w-[1140px] flex-col gap-4xl px-8 pt-xl">
         <div className="flex flex-col items-center gap-xl text-center">
           <RecommendedBadge text="Recommended by Emaar" />
           <div className="flex flex-col gap-sm">
@@ -56,7 +56,9 @@ export function PlanContent({ cardsLayout = "columns" }: { cardsLayout?: CardsLa
         </p>
       </div>
 
-      <PlanComparison />
+      <div className="mx-auto w-full max-w-[1140px] px-8 pt-8xl">
+        <PlanComparison />
+      </div>
       <TestimonialsSection />
       <FaqUntitled />
     </div>
