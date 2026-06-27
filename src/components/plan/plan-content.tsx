@@ -56,9 +56,11 @@ export function PlanContent({ cardsLayout = "columns" }: { cardsLayout?: CardsLa
         </p>
       </div>
 
-      <div className="mx-auto w-full max-w-[1140px] px-8 pt-8xl pb-[100px]">
-        <PlanComparison onSelect={select} />
-      </div>
+      <section className="bg-primary">
+        <div className="mx-auto w-full max-w-[1140px] px-8 pt-8xl pb-[100px]">
+          <PlanComparison onSelect={select} />
+        </div>
+      </section>
       <TestimonialsSection />
       <FaqUntitled />
     </div>
