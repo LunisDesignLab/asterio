@@ -15,12 +15,15 @@ function CellView({ value }: { value: Cell }) {
 }
 
 export function PlanComparison() {
+  // Continuous zebra across the whole table (not reset per category).
+  let rowIndex = 0;
+
   return (
     <section className="flex flex-col gap-xl">
       <h2 className="text-display-xs font-semibold text-primary">Compare plans</h2>
 
-      <div className="flex flex-col gap-3xl">
-        <div className={`${GRID} sticky top-0 z-10 border-b border-secondary bg-primary px-xl py-md`}>
+      <div className="overflow-hidden rounded-2xl">
+        <div className={`${GRID} border-b border-secondary px-xl py-md`}>
           <span className="text-sm font-semibold text-tertiary">Features</span>
           <span className="text-center text-sm font-semibold text-primary">Free</span>
           <span className="text-center text-sm font-semibold text-primary">Plus</span>
@@ -28,21 +31,25 @@ export function PlanComparison() {
         </div>
 
         {COMPARISON.map((group) => (
-          <div key={group.title} className="flex flex-col gap-sm">
-            <h3 className="px-xl text-sm font-semibold text-brand-secondary">{group.title}</h3>
-            <div className="overflow-hidden rounded-xl">
-              {group.rows.map((row, index) => (
+          <div key={group.title}>
+            <h3 className="px-xl pt-3xl pb-sm text-sm font-semibold text-brand-secondary">
+              {group.title}
+            </h3>
+            {group.rows.map((row) => {
+              const striped = rowIndex % 2 === 0;
+              rowIndex += 1;
+              return (
                 <div
                   key={row.feature}
-                  className={cn(`${GRID} px-xl py-lg text-sm`, index % 2 === 0 && "bg-secondary")}
+                  className={cn(`${GRID} px-xl py-lg text-sm`, striped ? "bg-[#f9f9f9]" : "bg-white")}
                 >
                   <span className="font-medium text-secondary">{row.feature}</span>
                   <CellView value={row.free} />
                   <CellView value={row.plus} />
                   <CellView value={row.pro} />
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         ))}
       </div>
