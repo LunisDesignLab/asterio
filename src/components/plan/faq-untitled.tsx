@@ -98,19 +98,9 @@ export const FaqUntitled = () => {
           </h2>
         </div>
 
-        <div className="mx-auto mt-16 w-full md:max-h-100 md:overflow-hidden">
-          <div className="size-full rounded-[9.03px] bg-primary p-[0.9px] shadow-lg ring-[0.56px] ring-utility-neutral-300 ring-inset md:rounded-[32px] md:p-1 md:ring-[2px]">
-            <div className="size-full rounded-[7.9px] bg-primary p-0.5 shadow-modern-mockup-inner-md md:rounded-[28px] md:p-[5.4px] md:shadow-modern-mockup-inner-lg">
-              <div className="relative size-full overflow-hidden rounded-[6.77px] bg-utility-neutral-50 ring-[0.56px] ring-utility-neutral-200 md:rounded-[24px] md:ring-[2px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/asterio-dashboard.png"
-                  className="size-full object-cover object-top"
-                  alt="Asterio broker dashboard"
-                />
-              </div>
-            </div>
-          </div>
+        <div className="mx-auto mt-16 w-full">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/asterio-dashboard.png" className="h-auto w-full" alt="Asterio broker dashboard" />
         </div>
       </div>
     </section>
