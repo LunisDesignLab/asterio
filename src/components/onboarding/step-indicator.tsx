@@ -10,7 +10,6 @@ const STEP_BY_PATH: Record<string, number> = {
   "/signup/verify": 2,
   "/signup/profile": 3,
   "/signup/plan": 4,
-  "/signup/plan-v2": 4,
   "/signup/payment": 4,
 };
 
