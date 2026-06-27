@@ -19,7 +19,10 @@ export function TestimonialsSection() {
         </div>
 
         <TestimonialAbstractImage />
-        <TestimonialSocialCards02 />
+        {/* +32px on top of the section gap, between the carousel and the cards grid */}
+        <div className="mt-8">
+          <TestimonialSocialCards02 />
+        </div>
       </div>
     </section>
   );

@@ -55,7 +55,7 @@ export const FaqUntitled = () => {
   };
 
   return (
-    <section className="bg-primary pt-16 lg:pt-24">
+    <section className="bg-primary pt-14">
       <div className="mx-auto w-full max-w-container px-4 md:px-8">
         <div className="mx-auto flex max-w-[768px] flex-col items-center text-center">
           <span className="text-sm font-semibold text-brand-secondary md:text-md">FAQs</span>

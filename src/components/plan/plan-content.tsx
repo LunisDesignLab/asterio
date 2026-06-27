@@ -39,7 +39,9 @@ export function PlanContent() {
           <div className="flex flex-col items-center gap-md">
             <BillingToggle value={billing} onChange={setBilling} />
             <p className="text-sm font-medium text-brand-secondary">
-              Save 17% with annual billing — that&apos;s 2 months free.
+              {billing === "annual"
+                ? "Nice choice — you're getting 2 months free, 17% off every year."
+                : "Save 17% with annual billing — that's 2 months free."}
             </p>
           </div>
         </div>

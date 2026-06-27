@@ -45,7 +45,7 @@ export const TestimonialAbstractImage = () => {
     return (
         <div className="flex flex-col gap-12 overflow-hidden md:gap-16 lg:flex-row lg:items-center">
                 <figure className="flex flex-col gap-8 md:gap-12 lg:flex-1">
-                    <div className="flex flex-1 flex-col gap-6 md:gap-12">
+                    <div className="flex flex-1 flex-col gap-3 md:gap-5">
                         <AnimatePresence initial={false} mode="popLayout">
                             <motion.div key={currentReviewIndex + "-rating"} aria-hidden="true" className="flex gap-1">
                                 {Array.from({
@@ -107,7 +107,7 @@ export const TestimonialAbstractImage = () => {
                                         delay: 0.06,
                                     },
                                 }}
-                                className="origin-bottom-left text-display-sm font-medium text-balance text-primary will-change-transform sm:text-display-md md:text-display-lg"
+                                className="origin-bottom-left text-display-sm font-medium text-balance text-primary will-change-transform"
                             >
                                 {reviews[currentReviewIndex].quote}
                             </motion.blockquote>
@@ -138,7 +138,7 @@ export const TestimonialAbstractImage = () => {
                                     y: 12,
                                     transition,
                                 }}
-                                className="flex origin-bottom-left gap-4 will-change-transform"
+                                className="flex origin-bottom-left gap-3 will-change-transform"
                             >
                                 <Avatar border src={reviews[currentReviewIndex].author.avatarUrl} alt={reviews[currentReviewIndex].author.name} size="xl" />
                                 <figcaption className="flex flex-col gap-0.5">

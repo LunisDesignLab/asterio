@@ -41,14 +41,23 @@ export function PlanCard({
             <span
               className={cn(
                 "flex size-10 shrink-0 items-center justify-center rounded-[10px]",
-                colorfulIcon ? "bg-[#f4f0ff] text-brand-secondary" : "bg-secondary text-tertiary",
+                plan.featured
+                  ? "bg-white text-brand-secondary"
+                  : colorfulIcon
+                    ? "bg-[#f4f0ff] text-brand-secondary"
+                    : "bg-secondary text-tertiary",
               )}
             >
               <Icon className="size-5" aria-hidden="true" />
             </span>
             <h3 className="text-xl font-semibold text-primary">{plan.name}</h3>
             {plan.badge && (
-              <span className="rounded-full bg-[#f4f0ff] px-md py-[2px] text-xs font-semibold text-brand-secondary">
+              <span
+                className={cn(
+                  "rounded-full px-md py-[2px] text-xs font-semibold text-brand-secondary",
+                  plan.featured ? "bg-white" : "bg-[#f4f0ff]",
+                )}
+              >
                 {plan.badge}
               </span>
             )}
