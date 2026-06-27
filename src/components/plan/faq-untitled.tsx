@@ -1,57 +1,59 @@
 "use client";
 
-import {
-  CreditCardRefresh,
-  File05,
-  Heart,
-  Send01,
-  SlashCircle01,
-  SwitchHorizontal01,
-} from "@untitledui/icons";
+import { useState } from "react";
+import { MinusCircle, PlusCircle } from "@untitledui/icons";
 import { Avatar } from "@/components/base/avatar/avatar";
 import { Button } from "@/components/base/buttons/button";
-import { FeaturedIcon } from "@/components/foundations/featured-icon/featured-icon";
+import { cn } from "@/lib/cn";
 
 const faqs = [
   {
     question: "Is there a free trial?",
     answer:
       "There's no time-limited trial. The Free plan lets you explore Asterio within its limits for as long as you like, and you can upgrade whenever you're ready.",
-    icon: Heart,
   },
   {
     question: "Can I change my plan later?",
     answer:
-      "Yes — upgrade or downgrade anytime from your settings. Changes take effect on your next billing cycle.",
-    icon: SwitchHorizontal01,
+      "Yes — upgrade or downgrade anytime from your settings. Changes take effect on your next billing cycle, and you keep access until the end of the current period.",
   },
   {
     question: "What's the difference between Plus and Pro?",
     answer:
-      "Plus is built for independent brokers organizing a portfolio. Pro adds higher limits, full Discover Investors, advanced AI, automatic SPA tracking, PDF parsing and CSV exports.",
-    icon: SlashCircle01,
+      "Plus is built for independent brokers organizing a portfolio — it unlocks the Discover Investors list with up to 5 contacts a month. Pro raises that to 25, adds advanced AI insights, automatic deal tracking, PDF parsing and CSV exports.",
   },
   {
     question: "How does annual billing work?",
     answer:
-      "Annual plans are billed once a year at a discounted monthly rate — that's 2 months free. You can switch between monthly and annual at any time.",
-    icon: CreditCardRefresh,
+      "Annual plans are billed once a year at a discounted monthly rate — that's 2 months free. You can switch between monthly and annual at any time, and the change applies from your next renewal.",
   },
   {
     question: "Do investors pay to receive my posts?",
     answer:
-      "No. Investors you invite join for free and only see what you share with their groups. Your subscription covers the broker tools.",
-    icon: File05,
+      "No. Investors you invite join for free and only see what you share with their groups. Your subscription covers the broker tools — distribution into your groups is always unlimited, on every plan.",
   },
   {
     question: "Can I cancel anytime?",
     answer:
-      "Yes. There's no long-term commitment — cancel anytime and keep access until the end of your billing period.",
-    icon: Send01,
+      "Yes. There's no long-term commitment — cancel anytime and keep access until the end of your billing period. Your groups and investors stay intact if you come back.",
   },
 ];
 
 export const FaqUntitled = () => {
+  const [openItems, setOpenItems] = useState<Set<number>>(() => new Set([0]));
+
+  const toggle = (index: number) => {
+    setOpenItems((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+      return next;
+    });
+  };
+
   return (
     <section className="bg-primary pt-16 lg:pt-24">
       <div className="mx-auto w-full max-w-container px-4 md:px-8">
@@ -65,16 +67,37 @@ export const FaqUntitled = () => {
           </p>
         </div>
 
-        <dl className="mt-16 grid grid-cols-1 justify-items-center gap-x-8 gap-y-10 sm:grid-cols-2 md:gap-y-16 lg:grid-cols-3">
-          {faqs.map((item) => (
-            <div key={item.question} className="flex max-w-[384px] flex-col items-center text-center">
-              <FeaturedIcon color="gray" theme="modern" size="lg" icon={item.icon} />
-              <dt className="mt-4 text-lg font-semibold text-primary md:mt-5 md:text-xl">
-                {item.question}
-              </dt>
-              <dd className="mt-1 text-md text-tertiary md:mt-2">{item.answer}</dd>
-            </div>
-          ))}
+        <dl className="mx-auto mt-12 w-full max-w-[768px] md:mt-16">
+          {faqs.map((item, index) => {
+            const isOpen = openItems.has(index);
+            const Icon = isOpen ? MinusCircle : PlusCircle;
+            return (
+              <div key={item.question} className="border-t border-secondary first:border-t-0">
+                <dt>
+                  <button
+                    type="button"
+                    onClick={() => toggle(index)}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${index}`}
+                    className="group flex w-full items-start justify-between gap-4 py-6 text-left"
+                  >
+                    <span className="text-lg font-semibold text-primary">{item.question}</span>
+                    <Icon
+                      aria-hidden="true"
+                      className="mt-0.5 size-6 shrink-0 text-fg-quaternary transition-colors group-hover:text-fg-tertiary"
+                    />
+                  </button>
+                </dt>
+                <dd
+                  id={`faq-answer-${index}`}
+                  hidden={!isOpen}
+                  className={cn("pr-10 text-md text-tertiary md:text-lg", isOpen && "pb-6")}
+                >
+                  {item.answer}
+                </dd>
+              </div>
+            );
+          })}
         </dl>
 
         <div className="mt-16 flex flex-col items-center gap-6 rounded-2xl bg-secondary px-6 py-8 text-center md:gap-8">

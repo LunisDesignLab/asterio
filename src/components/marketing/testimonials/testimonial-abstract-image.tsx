@@ -9,27 +9,27 @@ import { RoundButton } from "@/components/marketing/testimonials/round-button";
 
 const reviews = [
     {
-        quote: "We've really sped up our workflow using Untitled and haven't looked back.",
+        quote: "I stopped rebuilding listings from scratch. I pick up a developer's unit and have it in front of the right investors the same day.",
         author: {
-            name: "Sienna Hewitt",
-            title: "Project Manager, Warpspeed",
-            avatarUrl: "https://www.untitledui.com/images/avatars/sienna-hewitt?fm=webp&q=80",
+            name: "Yusuf Khan",
+            title: "Broker, Dubai",
+            avatarUrl: "https://www.untitledui.com/images/avatars/marco-kelly?fm=webp&q=80",
         },
     },
     {
-        quote: "Love the simplicity of the service and the prompt customer support.",
+        quote: "The day we publish a project, every broker sees the same accurate listing — prices and payment plans included.",
         author: {
-            name: "Caitlyn King",
-            title: "Data Engineer, Sisyphus",
-            avatarUrl: "https://www.untitledui.com/images/avatars/caitlyn-king?fm=webp&q=80",
+            name: "Nadia Rahman",
+            title: "Sales Director, Ellington",
+            avatarUrl: "https://www.untitledui.com/images/avatars/amelie-laurent?fm=webp&q=80",
         },
     },
     {
-        quote: "Untitled has saved us thousands of hours of work.",
+        quote: "No more noise. I only hear about units that fit my budget and the areas I actually care about.",
         author: {
-            name: "Lulu Meyers",
-            title: "PM, Hourglass",
-            avatarUrl: "https://www.untitledui.com/images/avatars/lulu-meyers?fm=webp&q=80",
+            name: "Omar Farouk",
+            title: "Property investor",
+            avatarUrl: "https://www.untitledui.com/images/avatars/eduard-franz?fm=webp&q=80",
         },
     },
 ];
@@ -163,41 +163,41 @@ export const TestimonialAbstractImage = () => {
 
                 <div className="grid h-122 w-[150%] grid-cols-[repeat(12,1fr)] grid-rows-[repeat(12,1fr)] gap-2 self-center sm:h-124 sm:w-[120%] md:w-auto md:gap-4 lg:flex-1">
                     <img
-                        src="https://www.untitledui.com/marketing/testimonial-abstract-image-01.webp"
+                        src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=900&q=80&auto=format&fit=crop"
                         className="size-full object-cover"
-                        alt="Alisa Hester"
+                        alt="Premium off-plan villa in Dubai"
                         style={{
                             gridArea: "3 / 3 / 7 / 7",
                         }}
                     />
                     <img
-                        src="https://www.untitledui.com/marketing/smiling-girl-3.webp"
+                        src="https://images.unsplash.com/photo-1546412414-e1885259563a?w=900&q=80&auto=format&fit=crop"
                         className="size-full object-cover"
-                        alt="Alisa Hester"
+                        alt="Dubai waterfront landmark"
                         style={{
                             gridArea: "1 / 7 / 7 / 11",
                         }}
                     />
                     <img
-                        src="https://www.untitledui.com/marketing/ai-woman-03.webp"
+                        src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80&auto=format&fit=crop"
                         className="size-full object-cover"
-                        alt="Alisa Hester"
+                        alt="Modern apartment interior"
                         style={{
                             gridArea: "7 / 1 / 10 / 5",
                         }}
                     />
                     <img
-                        src="https://www.untitledui.com/marketing/two-standing-women.webp"
+                        src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=900&q=80&auto=format&fit=crop"
                         className="size-full object-cover"
-                        alt="Alisa Hester"
+                        alt="Dubai property broker"
                         style={{
                             gridArea: "7 / 5 / 13 / 9",
                         }}
                     />
                     <img
-                        src="https://www.untitledui.com/marketing/smiling-girl-8.webp"
+                        src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80&auto=format&fit=crop"
                         className="size-full object-cover"
-                        alt="Alisa Hester"
+                        alt="Property investor"
                         style={{
                             gridArea: "7 / 9 / 10 / 13",
                         }}

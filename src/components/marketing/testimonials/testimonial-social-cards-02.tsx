@@ -5,56 +5,56 @@ import { StarIcon } from "@/components/foundations/rating-stars";
 const reviews = [
     {
         id: "review-01",
-        quote: "We've been using Untitled to kick start every new project and can't imagine working without it.",
+        quote: "I used to rebuild every listing from a PDF and still lose details. Now I pick up the developer's unit as-is and send it to the right group in minutes.",
         author: {
-            name: "Sienna Hewitt",
-            username: "@siennahewitt",
+            name: "Layla Haddad",
+            role: "Broker · Dubai Marina",
             imageUrl: "https://www.untitledui.com/images/avatars/sienna-hewitt?fm=webp&q=80",
         },
     },
     {
         id: "review-02",
-        quote: "From concept to completion, Untitled helps us deliver outstanding designs faster than ever.",
+        quote: "I only get units that actually match what I'm after — no more ten brokers spamming me the same irrelevant tower.",
         author: {
-            name: "Kari Rasmussen",
-            username: "@itskari",
-            imageUrl: "https://www.untitledui.com/images/avatars/kari-rasmussen?fm=webp&q=80",
+            name: "Omar Farouk",
+            role: "Property investor",
+            imageUrl: "https://www.untitledui.com/images/avatars/eduard-franz?fm=webp&q=80",
         },
     },
     {
         id: "review-03",
-        quote: "Every project starts with Untitled which has 10x'd our output. It saves us time while keeping the quality top-notch.",
+        quote: "Our brochures used to scatter across WhatsApp and come back distorted. On Asterio the listing stays exactly as we published it.",
         author: {
-            name: "Amélie Laurent",
-            username: "@alaurent_",
+            name: "Nadia Rahman",
+            role: "Sales Director, Ellington",
             imageUrl: "https://www.untitledui.com/images/avatars/amelie-laurent?fm=webp&q=80",
         },
     },
     {
         id: "review-04",
-        quote: "Untitled has quickly become our go-to resource for every design project. The results are consistently amazing.",
+        quote: "The group routing and AI insights changed how I work — I know which investor to call and what to say before I pick up the phone.",
         author: {
-            name: "Aliah Lane",
-            username: "@aliah_ux",
-            imageUrl: "https://www.untitledui.com/images/avatars/aliah-lane?fm=webp&q=80",
+            name: "Marco Bianchi",
+            role: "Broker · Business Bay",
+            imageUrl: "https://www.untitledui.com/images/avatars/marco-kelly?fm=webp&q=80",
         },
     },
     {
         id: "review-05",
-        quote: "Untitled offers exactly what we need to get started quickly. It's helped us cut down on design time significantly!",
+        quote: "Everything lives in one place. I save the units I like and my broker actually follows up on the right ones.",
         author: {
-            name: "Eduard Franz",
-            username: "@eduardfranz",
-            imageUrl: "https://www.untitledui.com/images/avatars/eduard-franz?fm=webp&q=80",
+            name: "Priya Nair",
+            role: "Property investor",
+            imageUrl: "https://www.untitledui.com/images/avatars/aliah-lane?fm=webp&q=80",
         },
     },
     {
         id: "review-06",
-        quote: "Untitled offers everything we need to get started on UI projects quickly. We go from zero to one, insanely fast.",
+        quote: "Price, payment plan and permit stay locked, so a hundred brokers can post our project without a single number going wrong.",
         author: {
-            name: "Lily-Rose Chedjou",
-            username: "@lilyrose",
-            imageUrl: "https://www.untitledui.com/images/avatars/lily-rose-chedjou?fm=webp&q=80",
+            name: "Sarah Lindholm",
+            role: "Head of Sales, Binghatti",
+            imageUrl: "https://www.untitledui.com/images/avatars/kari-rasmussen?fm=webp&q=80",
         },
     },
 ];
@@ -85,7 +85,7 @@ export const TestimonialSocialCards02 = () => {
                                     <VerifiedTick size="lg" />
                                 </span>
                             }
-                            subtitle={review.author.username}
+                            subtitle={review.author.role}
                         />
                     </div>
                 ))}
