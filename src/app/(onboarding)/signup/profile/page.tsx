@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MultiCombobox } from "@/components/ui/multi-combobox";
 import { AvatarUpload } from "@/components/ui/avatar-upload";
+import { saveProfile } from "./actions";
 
 // Provisional, UAE-relevant list — confirm with Adrian.
 const LANGUAGES = [
@@ -33,14 +34,17 @@ function ProfileContent() {
   const [company, setCompany] = useState("");
   const [rera, setRera] = useState("");
   const [languages, setLanguages] = useState<string[]>([]);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
   const [errors, setErrors] = useState<{
     firstName?: string;
     lastName?: string;
     languages?: string;
   }>({});
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setFormError(null);
     const next: typeof errors = {};
     if (!firstName.trim()) next.firstName = "Enter your first name.";
     if (!lastName.trim()) next.lastName = "Enter your last name.";
@@ -48,7 +52,14 @@ function ProfileContent() {
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
-    // Phase B: persist profile (+ upload avatar to storage) here.
+    // Broker-only fields (company, RERA, languages) persist in a later slice.
+    setSubmitting(true);
+    const result = await saveProfile({ firstName, lastName });
+    setSubmitting(false);
+    if (!result.ok) {
+      setFormError(result.error);
+      return;
+    }
     router.push(`/signup/plan?role=${role}`);
   }
 
@@ -131,8 +142,11 @@ function ProfileContent() {
         </div>
 
         <div className="flex flex-col items-center gap-lg">
-          <Button type="submit" variant="primary" fullWidth>
-            Continue
+          {formError && (
+            <p className="w-full text-left text-sm text-[#d92d20]">{formError}</p>
+          )}
+          <Button type="submit" variant="primary" fullWidth disabled={submitting}>
+            {submitting ? "Saving…" : "Continue"}
           </Button>
           <button
             type="button"

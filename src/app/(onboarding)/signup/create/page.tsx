@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,18 +10,25 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { PasswordStrength } from "@/components/ui/password-strength";
 import { GoogleIcon } from "@/components/icons/google";
 import { isValidEmail, suggestEmailDomain } from "@/lib/email";
+import { signUpWithRole } from "@/lib/auth/client-auth";
+import type { UserRole } from "@/lib/supabase/types";
 
-export default function SignupPage() {
+function SignupContent() {
   const router = useRouter();
+  const params = useSearchParams();
+  const role: UserRole = params.get("role") === "investor" ? "investor" : "broker";
   const [email, setEmail] = useState("");
   const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null);
   const [password, setPassword] = useState("");
   const [agree, setAgree] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
   const [errors, setErrors] = useState<{ email?: string; password?: string; agree?: string }>({});
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setFormError(null);
     const next: typeof errors = {};
     if (!isValidEmail(email)) next.email = "Enter a valid email address.";
     if (password.length < 8) next.password = "Password must be at least 8 characters.";
@@ -29,8 +36,14 @@ export default function SignupPage() {
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
-    // Phase B: call Supabase Auth signUp + send email OTP here.
-    router.push(`/signup/verify?email=${encodeURIComponent(email)}`);
+    setSubmitting(true);
+    const result = await signUpWithRole(email, password, role);
+    setSubmitting(false);
+    if (!result.ok) {
+      setFormError(result.error);
+      return;
+    }
+    router.push(`/signup/verify?email=${encodeURIComponent(email)}&role=${role}`);
   }
 
   return (
@@ -133,8 +146,11 @@ export default function SignupPage() {
           </div>
 
           <div className="flex flex-col items-center gap-md">
-            <Button type="submit" variant="primary" fullWidth>
-              Create account
+            {formError && (
+              <p className="w-full text-left text-sm text-[#d92d20]">{formError}</p>
+            )}
+            <Button type="submit" variant="primary" fullWidth disabled={submitting}>
+              {submitting ? "Creating account…" : "Create account"}
             </Button>
             <p className="text-sm text-tertiary">or</p>
             <Button
@@ -156,5 +172,13 @@ export default function SignupPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense>
+      <SignupContent />
+    </Suspense>
   );
 }

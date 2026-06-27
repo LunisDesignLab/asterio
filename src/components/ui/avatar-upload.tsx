@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { Pencil, Trash2, Upload } from "lucide-react";
 import { cn } from "@/lib/cn";
 
-const MAX_BYTES = 3 * 1024 * 1024;
+const MAX_BYTES = 5 * 1024 * 1024;
 const ACCEPTED = ["image/png", "image/jpeg"];
 
 interface AvatarUploadProps {
@@ -27,7 +27,7 @@ export function AvatarUpload({ onChange }: AvatarUploadProps) {
       return;
     }
     if (file.size > MAX_BYTES) {
-      setError("Image must be 3MB or smaller.");
+      setError("Image must be 5MB or smaller.");
       return;
     }
     setError(null);
@@ -101,7 +101,7 @@ export function AvatarUpload({ onChange }: AvatarUploadProps) {
       />
 
       <p className={cn("text-center text-sm", error ? "text-[#d92d20]" : "text-placeholder")}>
-        {error ?? "Upload profile picture. PNG, JPG, max 3MB"}
+        {error ?? "Upload profile picture. PNG, JPG, max 5MB"}
       </p>
     </div>
   );

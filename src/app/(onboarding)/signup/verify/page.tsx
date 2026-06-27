@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { OtpInput } from "@/components/ui/otp-input";
 import { cn } from "@/lib/cn";
+import { resendSignupOtp, verifyEmailOtp } from "@/lib/auth/client-auth";
 
 const CODE_LENGTH = 6;
 const RESEND_SECONDS = 60;
@@ -22,10 +23,12 @@ function VerifyContent() {
   const router = useRouter();
   const params = useSearchParams();
   const email = params.get("email") ?? "";
+  const role = params.get("role") ?? "broker";
 
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [errorNonce, setErrorNonce] = useState(0);
+  const [verifying, setVerifying] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(RESEND_SECONDS);
 
   // Countdown so "Resend code" can't be spammed.
@@ -35,10 +38,11 @@ function VerifyContent() {
     return () => clearTimeout(id);
   }, [secondsLeft]);
 
-  function resend() {
+  async function resend() {
     if (secondsLeft > 0) return;
-    // Phase B: trigger Supabase resend OTP here.
     setSecondsLeft(RESEND_SECONDS);
+    const result = await resendSignupOtp(email);
+    if (!result.ok) fail(result.error);
   }
 
   function fail(message: string) {
@@ -46,19 +50,20 @@ function VerifyContent() {
     setErrorNonce((n) => n + 1);
   }
 
-  // Phase B: replace with Supabase verifyOtp. Stub: any code passes,
-  // "000000" demonstrates the inline error state.
-  function verify(value: string) {
+  async function verify(value: string) {
     if (value.length < CODE_LENGTH) {
       fail("Enter the 6-digit code.");
       return;
     }
-    if (value === "000000") {
+    setVerifying(true);
+    const result = await verifyEmailOtp(email, value);
+    setVerifying(false);
+    if (!result.ok) {
       fail("That code isn't right. Check your inbox and try again.");
       return;
     }
     setError(null);
-    router.push("/signup/profile");
+    router.push(`/signup/profile?role=${role}`);
   }
 
   return (
@@ -94,8 +99,14 @@ function VerifyContent() {
         </div>
 
         <div className="flex flex-col items-center gap-md">
-          <Button type="button" variant="primary" fullWidth onClick={() => verify(code)}>
-            Verify code
+          <Button
+            type="button"
+            variant="primary"
+            fullWidth
+            disabled={verifying}
+            onClick={() => verify(code)}
+          >
+            {verifying ? "Verifying…" : "Verify code"}
           </Button>
           <p className="text-sm text-tertiary">
             Didn&apos;t receive the code?{" "}

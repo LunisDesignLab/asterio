@@ -293,5 +293,9 @@ building the product. **Reply in Romanian**, warm and direct.
   security/UX risks surfaced before he hits them. Never present unverified work as done.
 - **Audit before building** any page (see Figma workflow).
 - **Don't work on live / don't push** until Adrian says so. Develop locally / on a branch.
-- UAE-specific: data residency in-region (Supabase ME region + matched Vercel function
-  region); RERA/Trakheesi advertising permits and PDPL consent are live concerns to track.
+- UAE-specific: data residency — **Supabase has no Middle East region**, so V1 runs on
+  **Frankfurt `eu-central-1`** (GDPR adequacy = the most defensible cross-border basis under
+  PDPL), with the Vercel function region matched (`fra1`). PDPL consent + a cross-border
+  transfer notice are captured at onboarding. Revisit (migrate to a ME region or self-host in
+  AWS UAE) before scaling with real investor PII; confirm with a UAE data-protection lawyer.
+  RERA/Trakheesi advertising permits and PDPL consent remain live concerns to track.
