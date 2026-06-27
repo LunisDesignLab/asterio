@@ -92,19 +92,10 @@ export const FaqUntitled = () => {
           <Button size="xl">Get in touch</Button>
         </div>
 
-        <div className="mt-16 flex flex-col justify-center text-center">
+        <div className="mt-16 text-center">
           <h2 className="text-display-sm font-semibold text-primary md:text-display-md">
             Start growing your portfolio with Asterio
           </h2>
-          <p className="mt-4 text-lg text-tertiary md:mt-5 md:text-xl">
-            Start free — no card required. Upgrade whenever you&apos;re ready.
-          </p>
-          <div className="mt-8 flex flex-col-reverse gap-3 self-stretch md:flex-row md:self-center">
-            <Button color="secondary" size="xl">
-              Compare plans
-            </Button>
-            <Button size="xl">Start for free</Button>
-          </div>
         </div>
 
         <div className="mx-auto mt-16 w-full md:max-h-100 md:overflow-hidden">
@@ -113,9 +104,9 @@ export const FaqUntitled = () => {
               <div className="relative size-full overflow-hidden rounded-[6.77px] bg-utility-neutral-50 ring-[0.56px] ring-utility-neutral-200 md:rounded-[24px] md:ring-[2px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://www.untitledui.com/marketing/screen-mockups/dashboard-desktop-mockup-light-01.webp"
-                  className="size-full object-cover"
-                  alt="Asterio dashboard preview placeholder"
+                  src="/asterio-dashboard.png"
+                  className="size-full object-cover object-top"
+                  alt="Asterio broker dashboard"
                 />
               </div>
             </div>
