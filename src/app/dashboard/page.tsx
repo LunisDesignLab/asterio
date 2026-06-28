@@ -1,65 +1,34 @@
 import { redirect } from "next/navigation";
+import { AsterioLogo } from "@/components/icons/asterio-logo";
 import { getMyProfile } from "@/lib/repositories/profiles";
-import { getMyBrokerProfile } from "@/lib/repositories/broker-profiles";
 import { LogoutButton } from "./logout-button";
+import { WelcomeExperience } from "@/components/dashboard/welcome-experience";
 
 // Protected: a session is required. The profile is read through RLS, so this
-// page can only ever show the signed-in user's own data.
+// page can only ever show the signed-in user's own data. The real broker
+// workspace is built next — for now this is an empty shell with the welcome modal.
 export default async function DashboardPage() {
   const profile = await getMyProfile();
   if (!profile) redirect("/signup");
 
-  const broker = profile.role === "broker" ? await getMyBrokerProfile() : null;
-  const name = profile.full_name?.trim() || profile.email || "there";
-  const languages = profile.preferred_languages.length
-    ? profile.preferred_languages.join(", ")
-    : "—";
+  const firstName = profile.full_name?.trim().split(" ")[0] || profile.email?.split("@")[0] || "there";
 
   return (
-    <main className="mx-auto flex min-h-dvh w-full max-w-[640px] flex-col justify-center gap-3xl px-8 py-4xl">
-      <div className="flex items-start justify-between gap-xl">
-        <div className="flex flex-col gap-sm">
-          <h1 className="text-display-sm font-semibold tracking-[-0.02em] text-primary">
-            Welcome, {name}
-          </h1>
-          <p className="text-md text-tertiary">
-            You&apos;re signed in. This is a placeholder dashboard — the real broker
-            workspace comes next.
-          </p>
+    <div className="flex min-h-dvh w-full flex-col bg-secondary">
+      <header className="flex items-center justify-between gap-md border-b border-secondary bg-primary px-8 py-lg">
+        <div className="flex items-center gap-[10px] text-[#0a0d12]">
+          <AsterioLogo className="size-7" />
+          <span className="text-lg font-bold tracking-tight">Asterio</span>
         </div>
-        <LogoutButton />
-      </div>
+        <div className="flex items-center gap-md">
+          <WelcomeExperience name={firstName} />
+          <LogoutButton />
+        </div>
+      </header>
 
-      <dl className="grid grid-cols-2 gap-xl rounded-2xl bg-secondary p-xl">
-        <div className="flex flex-col gap-xxs">
-          <dt className="text-sm text-tertiary">Role</dt>
-          <dd className="text-md font-medium text-primary capitalize">{profile.role}</dd>
-        </div>
-        <div className="flex flex-col gap-xxs">
-          <dt className="text-sm text-tertiary">Plan</dt>
-          <dd className="text-md font-medium text-primary capitalize">{profile.plan}</dd>
-        </div>
-        <div className="col-span-2 flex flex-col gap-xxs">
-          <dt className="text-sm text-tertiary">Email</dt>
-          <dd className="text-md font-medium text-primary">{profile.email}</dd>
-        </div>
-        <div className="col-span-2 flex flex-col gap-xxs">
-          <dt className="text-sm text-tertiary">Preferred languages</dt>
-          <dd className="text-md font-medium text-primary">{languages}</dd>
-        </div>
-        {profile.role === "broker" && (
-          <>
-            <div className="flex flex-col gap-xxs">
-              <dt className="text-sm text-tertiary">Company</dt>
-              <dd className="text-md font-medium text-primary">{broker?.company || "—"}</dd>
-            </div>
-            <div className="flex flex-col gap-xxs">
-              <dt className="text-sm text-tertiary">RERA</dt>
-              <dd className="text-md font-medium text-primary">{broker?.rera_number || "—"}</dd>
-            </div>
-          </>
-        )}
-      </dl>
-    </main>
+      <main className="flex flex-1 items-center justify-center px-8 py-4xl">
+        <p className="text-md text-tertiary">Your workspace is being built — check back soon.</p>
+      </main>
+    </div>
   );
 }

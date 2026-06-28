@@ -56,15 +56,10 @@ function PaymentContent() {
     };
   }, []);
 
-  // Free plan has nothing to charge — go straight to the success screen.
+  // Free plan has nothing to charge and no receipt — drop straight into the app.
   useEffect(() => {
-    if (isFree) {
-      const trx = makeTrx();
-      router.replace(
-        `/signup/success?plan=free&billing=${billing}&amount=0&trx=${trx}&date=${encodeURIComponent(today())}`,
-      );
-    }
-  }, [isFree, billing, router]);
+    if (isFree) router.replace("/dashboard");
+  }, [isFree, router]);
 
   if (!plan || isFree) return null;
 
