@@ -26,6 +26,19 @@ export type BrokerProfile = {
   updated_at: string;
 };
 
+export type Group = {
+  id: string;
+  broker_id: string;
+  name: string;
+  description: string | null;
+  private_mode: boolean;
+  thumbnail_url: string | null;
+  units_type: string[];
+  categories: string[];
+  created_at: string;
+  updated_at: string;
+};
+
 export type Database = {
   public: {
     Tables: {
@@ -68,6 +81,34 @@ export type Database = {
           broker_id?: string;
           company?: string | null;
           rera_number?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      groups: {
+        Row: Group;
+        Insert: {
+          id?: string;
+          broker_id: string;
+          name: string;
+          description?: string | null;
+          private_mode?: boolean;
+          thumbnail_url?: string | null;
+          units_type?: string[];
+          categories?: string[];
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          broker_id?: string;
+          name?: string;
+          description?: string | null;
+          private_mode?: boolean;
+          thumbnail_url?: string | null;
+          units_type?: string[];
+          categories?: string[];
           created_at?: string;
           updated_at?: string;
         };
