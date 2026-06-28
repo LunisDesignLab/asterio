@@ -67,6 +67,21 @@ export function annualMonthly(priceMonthly: number): number {
   return Math.round((priceMonthly * ANNUAL_MONTHS_CHARGED) / 12);
 }
 
+export type Billing = "monthly" | "annual";
+
+// UAE VAT.
+export const VAT_RATE = 0.05;
+
+/** Order breakdown in AED for the checkout: monthly charges one month, annual
+ * charges ANNUAL_MONTHS_CHARGED months up front. */
+export function orderBreakdown(plan: Plan, billing: Billing) {
+  const subtotal =
+    billing === "annual" ? plan.priceMonthly * ANNUAL_MONTHS_CHARGED : plan.priceMonthly;
+  const vat = Math.round(subtotal * VAT_RATE * 100) / 100;
+  const total = Math.round((subtotal + vat) * 100) / 100;
+  return { subtotal, vat, total };
+}
+
 export type Cell = string | boolean;
 
 export interface ComparisonRow {

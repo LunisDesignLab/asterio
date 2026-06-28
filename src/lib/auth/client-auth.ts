@@ -89,3 +89,12 @@ export async function signOut(): Promise<void> {
   const supabase = createClient();
   await supabase.auth.signOut();
 }
+
+/** The signed-in user's email, for pre-filling forms (e.g. checkout). */
+export async function getCurrentUserEmail(): Promise<string | null> {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user?.email ?? null;
+}
