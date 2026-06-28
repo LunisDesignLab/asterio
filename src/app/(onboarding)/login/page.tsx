@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Notification } from "@/components/ui/notification";
 import { isValidEmail } from "@/lib/email";
 import { signInWithPassword } from "@/lib/auth/client-auth";
 
@@ -79,6 +80,11 @@ export default function LoginPage() {
 
       <div className="flex w-full flex-col gap-3xl">
         <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3xl">
+          {error && (
+            <Notification variant={locked ? "warning" : "error"} onClose={() => setError(null)}>
+              {error}
+            </Notification>
+          )}
           <div className="flex flex-col gap-xl">
             <Input
               id="email"
@@ -126,7 +132,6 @@ export default function LoginPage() {
           </div>
 
           <div className="flex flex-col items-center gap-md">
-            {error && <p className="w-full text-left text-sm text-[#d92d20]">{error}</p>}
             {showResetHint && !locked && (
               <p className="w-full text-left text-sm text-tertiary">
                 Trouble signing in?{" "}
