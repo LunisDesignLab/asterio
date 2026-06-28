@@ -24,11 +24,13 @@ function SignupContent() {
   const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const [existingAccount, setExistingAccount] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string; agree?: string }>({});
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setFormError(null);
+    setExistingAccount(false);
     const next: typeof errors = {};
     if (!isValidEmail(email)) next.email = "Enter a valid email address.";
     if (password.length < 8) next.password = "Password must be at least 8 characters.";
@@ -40,7 +42,11 @@ function SignupContent() {
     const result = await signUpWithRole(email, password, role);
     setSubmitting(false);
     if (!result.ok) {
-      setFormError(result.error);
+      if (result.code === "already_registered") {
+        setExistingAccount(true);
+      } else {
+        setFormError(result.error);
+      }
       return;
     }
     router.push(`/signup/verify?email=${encodeURIComponent(email)}&role=${role}`);
@@ -72,6 +78,7 @@ function SignupContent() {
                   setEmail(e.target.value);
                   if (errors.email) setErrors((p) => ({ ...p, email: undefined }));
                   if (emailSuggestion) setEmailSuggestion(null);
+                  if (existingAccount) setExistingAccount(false);
                 }}
                 onBlur={() => {
                   const value = email.trim();
@@ -148,6 +155,15 @@ function SignupContent() {
           <div className="flex flex-col items-center gap-md">
             {formError && (
               <p className="w-full text-left text-sm text-[#d92d20]">{formError}</p>
+            )}
+            {existingAccount && (
+              <div className="w-full rounded-lg bg-secondary px-lg py-md text-left text-sm text-secondary">
+                An account with this email already exists.{" "}
+                <Link href="/login" className="font-semibold text-brand-secondary">
+                  Log in instead
+                </Link>
+                .
+              </div>
             )}
             <Button type="submit" variant="primary" fullWidth disabled={submitting}>
               {submitting ? "Creating account…" : "Create account"}

@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getMyProfile } from "@/lib/repositories/profiles";
+import { LogoutButton } from "./logout-button";
 
 // Protected: a session is required. The profile is read through RLS, so this
 // page can only ever show the signed-in user's own data.
@@ -11,14 +12,17 @@ export default async function DashboardPage() {
 
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-[640px] flex-col justify-center gap-3xl px-8 py-4xl">
-      <div className="flex flex-col gap-sm">
-        <h1 className="text-display-sm font-semibold tracking-[-0.02em] text-primary">
-          Welcome, {name}
-        </h1>
-        <p className="text-md text-tertiary">
-          You&apos;re signed in. This is a placeholder dashboard — the real broker
-          workspace comes next.
-        </p>
+      <div className="flex items-start justify-between gap-xl">
+        <div className="flex flex-col gap-sm">
+          <h1 className="text-display-sm font-semibold tracking-[-0.02em] text-primary">
+            Welcome, {name}
+          </h1>
+          <p className="text-md text-tertiary">
+            You&apos;re signed in. This is a placeholder dashboard — the real broker
+            workspace comes next.
+          </p>
+        </div>
+        <LogoutButton />
       </div>
 
       <dl className="grid grid-cols-2 gap-xl rounded-2xl bg-secondary p-xl">
