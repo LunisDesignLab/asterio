@@ -1,7 +1,6 @@
 /**
- * Hand-written DB types for the first vertical slice (profiles only).
- * Once the Supabase project exists we regenerate this with the Supabase CLI
- * (`supabase gen types typescript`) so it can never drift from the schema.
+ * Hand-written DB types. Regenerate with the Supabase CLI
+ * (`supabase gen types typescript`) once we wire it up, so it can never drift.
  */
 
 export type UserRole = "developer" | "broker" | "investor";
@@ -14,6 +13,15 @@ export type Profile = {
   email: string | null;
   phone: string | null;
   full_name: string | null;
+  preferred_languages: string[];
+  created_at: string;
+  updated_at: string;
+};
+
+export type BrokerProfile = {
+  broker_id: string;
+  company: string | null;
+  rera_number: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -30,6 +38,7 @@ export type Database = {
           email?: string | null;
           phone?: string | null;
           full_name?: string | null;
+          preferred_languages?: string[];
           created_at?: string;
           updated_at?: string;
         };
@@ -40,6 +49,25 @@ export type Database = {
           email?: string | null;
           phone?: string | null;
           full_name?: string | null;
+          preferred_languages?: string[];
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      broker_profiles: {
+        Row: BrokerProfile;
+        Insert: {
+          broker_id: string;
+          company?: string | null;
+          rera_number?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          broker_id?: string;
+          company?: string | null;
+          rera_number?: string | null;
           created_at?: string;
           updated_at?: string;
         };

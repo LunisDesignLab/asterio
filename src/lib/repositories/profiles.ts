@@ -29,6 +29,7 @@ export async function getMyProfile(): Promise<Profile | null> {
 export type UpdateProfileInput = {
   full_name?: string | null;
   phone?: string | null;
+  preferred_languages?: string[];
 };
 
 /** Update the signed-in user's profile. RLS blocks updating anyone else's. */

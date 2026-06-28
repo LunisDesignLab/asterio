@@ -52,9 +52,8 @@ function ProfileContent() {
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
-    // Broker-only fields (company, RERA, languages) persist in a later slice.
     setSubmitting(true);
-    const result = await saveProfile({ firstName, lastName });
+    const result = await saveProfile({ firstName, lastName, languages, company, rera });
     setSubmitting(false);
     if (!result.ok) {
       setFormError(result.error);

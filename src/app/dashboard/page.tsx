@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getMyProfile } from "@/lib/repositories/profiles";
+import { getMyBrokerProfile } from "@/lib/repositories/broker-profiles";
 import { LogoutButton } from "./logout-button";
 
 // Protected: a session is required. The profile is read through RLS, so this
@@ -8,7 +9,11 @@ export default async function DashboardPage() {
   const profile = await getMyProfile();
   if (!profile) redirect("/signup");
 
+  const broker = profile.role === "broker" ? await getMyBrokerProfile() : null;
   const name = profile.full_name?.trim() || profile.email || "there";
+  const languages = profile.preferred_languages.length
+    ? profile.preferred_languages.join(", ")
+    : "—";
 
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-[640px] flex-col justify-center gap-3xl px-8 py-4xl">
@@ -38,6 +43,22 @@ export default async function DashboardPage() {
           <dt className="text-sm text-tertiary">Email</dt>
           <dd className="text-md font-medium text-primary">{profile.email}</dd>
         </div>
+        <div className="col-span-2 flex flex-col gap-xxs">
+          <dt className="text-sm text-tertiary">Preferred languages</dt>
+          <dd className="text-md font-medium text-primary">{languages}</dd>
+        </div>
+        {profile.role === "broker" && (
+          <>
+            <div className="flex flex-col gap-xxs">
+              <dt className="text-sm text-tertiary">Company</dt>
+              <dd className="text-md font-medium text-primary">{broker?.company || "—"}</dd>
+            </div>
+            <div className="flex flex-col gap-xxs">
+              <dt className="text-sm text-tertiary">RERA</dt>
+              <dd className="text-md font-medium text-primary">{broker?.rera_number || "—"}</dd>
+            </div>
+          </>
+        )}
       </dl>
     </main>
   );
